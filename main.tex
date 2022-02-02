@@ -62,7 +62,7 @@
 % SUMMARY
 % -------------------------------------
 \vspace{-2em} % used to remove annoying vertical space under title
-\small{I am a senior year undergraduate student studying Computer Engineering at Colorado State University.\\
+\small{I am a final semester undergraduate student studying Computer Engineering at Colorado State University.\\
   I have a passion for programming and electronics, with interests in low-level, embedded, and kernel-space programming.}
 \vspace{-0.5em} % used to make last workaround look consistant
 % -------------------------------------
@@ -71,8 +71,10 @@
 \section{Education}
 \begin{itemize}
 \item{\cventry{Graduating May 2022}{Bachelor of Science in Computer Engineering, Minor in Mathematics, Minor in Computer Science}{Colorado State University}{Fort Collins, CO}{}{
+    \textit{summa cum laude} \hfill Anticipated 4.0 GPA
     \begin{itemize}
-    \item \textbf{Relevant Coursework:}
+    \item
+      \textbf{Relevant Coursework:}
       Compilers,
       Fault Tolerant Computing,
       Computer Micro-Architecture,
@@ -83,15 +85,6 @@
       Computer Networking,
       Analog and Digital Circuit design,
       Signals and Systems
-    \item \textbf{Senior Design:}
-      \begin{itemize}
-      \item Designing and implementing an embedded systems framework for enterprise-grade
-        quadrupedal robotics applications
-        \item Extending existing open-source designs to provide feature-parity with existing
-          industry solutions at a fraction of the cost
-        \item Collaborating with ECE Outreach to excite middle and high school students
-          about Electrical and Computer Engineering
-      \end{itemize}
     \end{itemize}
 }}
 \end{itemize}
@@ -103,7 +96,7 @@
 \item \textbf{Programming Languages:}
   \begin{itemize}
     \item \makebox[3.5cm][l]{Procedural} ARM Assembly, Bash, \textbf{C}, Fish, Matlab, MIPS, Spice, Verilog
-    \item \makebox[3.5cm][l]{Object-Oriented} Arduino INO, \textbf{\Cpp}, Java, \textbf{JavaScript}, Python, \textbf{Rust}, VBS
+    \item \makebox[3.5cm][l]{Object-Oriented} Arduino INO, \textbf{\Cpp}, Java, \textbf{JavaScript}, Python, \textbf{Rust}
     \item \makebox[3.5cm][l]{Functional} Lisp, Elisp, \textbf{\LaTeX}, Scala
   \end{itemize}
 \item \textbf{Libraries and Frameworks:} 
@@ -124,7 +117,7 @@
     \begin{itemize}
     \item Designed a performance modeling library to mock enterprise-grade RDMA behavior without dedicated hardware
     \item Proved feasibility of an implementation method that would drastically reduce startup cost for new customers
-    \item Worked in \Cpp with InfiniBand and NSK to invisibly apply modifications to existing benchmarks and applications
+    \item Worked in C with InfiniBand and NSK to invisibly apply kernel-mode modifications to existing benchmarks and applications
     \end{itemize}
 }}
 \item{\cventry{May 2020 -- Aug 2020}{Hewlett Packard Enterprise -- NonStop Manageability Team}
@@ -151,6 +144,17 @@
 % -------------------------------------
 \section{Notable Projects}
 \begin{itemize}
+\item{\cventry{Aug 2021 -- May 2022}{Colorado State University -- ECE Department}
+  {Senior Design Project}{Ongoing Development}{}{
+    \begin{itemize}
+    \item Designing and implementing an embedded systems framework for enterprise-grade
+      quadrupedal robotics applications
+    \item Extending existing open-source designs to provide feature-parity with existing
+      industry solutions at a fraction of the cost
+    \item Collaborating with ECE Outreach to excite middle and high school students
+      about Electrical and Computer Engineering
+    \end{itemize}
+}}
 \item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{rust_logo.png}}\xspace\httplink[docs.rs/hotpatch]{docs.rs/hotpatch/0.3.0/hotpatch/}}{\protect\faGithub\xspace\httplink[Shizcow/hotpatch]{www.github.com/Shizcow/hotpatch}}{hotpatch}{v0.3.0 Released Feb 2021}{}{
     \begin{itemize}
     \item Rust crate for cross-platform hot-reloading of functions and methods at runtime as easily as possible
