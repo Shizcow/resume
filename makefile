@@ -2,9 +2,14 @@ export TEXINPUTS=.:..//:
 JOB=DevinPohlResume
 LTX=xelatex
 
+SRCFILES=main.tex *.png
+
 default: $(JOB).pdf
 
-$(JOB).pdf: main.tex *.png | build
+watch:
+	inotifywait -qm --event modify --format '%w' $(SRCFILES) | xargs -I{} $(MAKE)
+
+$(JOB).pdf: $(SRCFILES) | build
 	cd build && $(LTX) -jobname=$(JOB) ../main.tex
 	mv build/$(JOB).pdf .
 
