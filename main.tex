@@ -1,5 +1,5 @@
 % -------------------------------------
-% PREAMBLE
+% PACKAGES
 % -------------------------------------
 \documentclass[10pt,letterpaper,sans]{moderncv}
 \moderncvstyle{banking}
@@ -10,7 +10,36 @@
 \usepackage{verbatim}
 \usepackage[scale=0.75,margin=0.65in]{geometry}
 \usepackage{import}
+\usepackage{etoolbox}
 \usepackage[super]{nth}
+
+% -------------------------------------
+% CONDITIONALS
+% -------------------------------------
+
+\newtoggle{mission-grad}
+% Mission statement: Are we talking about grad school?
+\toggletrue{mission-grad}
+
+\newtoggle{silvermedal}
+% CEC silver medal text
+\toggletrue{silvermedal}
+
+\newtoggle{pouchet}
+% Practical Program Equivalence project
+\togglefalse{pouchet}
+
+\newtoggle{yashwant}
+% The other practical program equivalence project
+\toggletrue{yashwant}
+
+\newtoggle{tech-corps}
+% Tech corps job
+\togglefalse{tech-corps}
+
+% -------------------------------------
+% PREAMBLE
+% -------------------------------------
 
 % underscores in this font look really bad
 \renewcommand{\_}{\textscale{.7}{\textunderscore}}
@@ -30,15 +59,15 @@
 \makeatletter
 \RenewDocumentCommand{\social}{O{}O{}m}{
   \ifthenelse{\equal{#2}{}}
-    { 
-    \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}
-    \ifthenelse{\equal{#1}{email2}}  {\collectionadd[email2]{socials}  {\protect\emailsymbol\emaillink[#3]{#3}}}       {} % <= adding this
-    \ifthenelse{\equal{#1}{homepage}}{\collectionadd[homepage]{socials}{\protect\faGlobe\xspace\httplink[#3]{#3}}}     {} % <= adding this
-    \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}
-    \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}
-    \ifthenelse{\equal{#1}{arch}}  {\collectionadd[arch]{socials}  {\protect\raisebox{-0.25mm}{\includegraphics[scale=0.215]{arch_logo.png}}\xspace\httplink[#3]{aur.archlinux.org/account/#3}}}{} % <= adding this
-    }
-    {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
+             { 
+               \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}
+               \ifthenelse{\equal{#1}{email2}}  {\collectionadd[email2]{socials}  {\protect\emailsymbol\emaillink[#3]{#3}}}       {} % <= adding this
+               \ifthenelse{\equal{#1}{homepage}}{\collectionadd[homepage]{socials}{\protect\faGlobe\xspace\httplink[#3]{#3}}}     {} % <= adding this
+               \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}
+               \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}
+               \ifthenelse{\equal{#1}{arch}}  {\collectionadd[arch]{socials}  {\protect\raisebox{-0.25mm}{\includegraphics[scale=0.215]{arch_logo.png}}\xspace\httplink[#3]{aur.archlinux.org/account/#3}}}{} % <= adding this
+             }
+             {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
 \makeatother
 
 
@@ -62,8 +91,15 @@
 % SUMMARY
 % -------------------------------------
 \vspace{-2em} % used to remove annoying vertical space under title
-\small{I am a final semester undergraduate student studying Computer Engineering at Colorado State University.\\
-  I have a passion for programming and electronics, with interests in low-level, embedded, and kernel-space programming.}
+\small{
+  \iftoggle{mission-grad}{
+    I am a final semester undergraduate student studying Computer Engineering at Colorado State University.\\
+    I will return for a graduate degree in compilers and high performance computing, with additional interests in firmware and kernels.
+  }{
+    I am a final semester undergraduate student studying Computer Engineering at Colorado State University.\\
+    I have a passion for programming and electronics, with interests in firmware, compilers, and high performance computing.
+  }
+}
 \vspace{-0.5em} % used to make last workaround look consistant
 % -------------------------------------
 % EDUCATION
@@ -71,8 +107,19 @@
 \section{Education}
 \begin{itemize}
 \item{\cventry{Graduating May 2022}{Bachelor of Science in Computer Engineering, Minor in Mathematics, Minor in Computer Science}{Colorado State University}{Fort Collins, CO}{}{
-    \textit{summa cum laude} \hfill Anticipated 4.0 GPA
     \begin{itemize}
+    \item
+      \textbf{Academic Distinctions:}
+      \iftoggle{silvermedal}{
+        \begin{itemize}
+        \item
+          \textit{CEC Silver Medal Candidate}: Recognized as the number one computer engineering undergraduate in all of Colorado
+        \item 
+          \textit{summa cum laude}, 4.0 GPA
+        \end{itemize}
+      }{
+        \textit{summa cum laude}, 4.0 GPA
+      }
     \item
       \textbf{Relevant Coursework:}
       Compilers,
@@ -95,15 +142,15 @@
 \begin{itemize}
 \item \textbf{Programming Languages:}
   \begin{itemize}
-    \item \makebox[3.5cm][l]{Procedural} ARM Assembly, Bash, \textbf{C}, Fish, Matlab, MIPS, Spice, Verilog
-    \item \makebox[3.5cm][l]{Object-Oriented} Arduino INO, \textbf{\Cpp}, Java, \textbf{JavaScript}, Python, \textbf{Rust}
-    \item \makebox[3.5cm][l]{Functional} Lisp, Elisp, \textbf{\LaTeX}, Scala
+  \item \makebox[3.5cm][l]{Procedural} ARM Assembly, Bash, \textbf{C}, Fish, LLVM, Matlab, MIPS, Spice, Verilog
+  \item \makebox[3.5cm][l]{Object-Oriented} Arduino INO, \textbf{\Cpp}, Java, \textbf{JavaScript}, Python, \textbf{Rust}
+  \item \makebox[3.5cm][l]{Functional} Lisp, Elisp, \textbf{\LaTeX}, Scala
   \end{itemize}
 \item \textbf{Libraries and Frameworks:} 
   \begin{itemize}
   \item \makebox[3.5cm][l]{Graphical} Native X11, XCB, Cairo, Pango, Unicode CLDR,
     GTK, Qt, Android API, ncurses
-  \item \makebox[3.5cm][l]{Computational} GMP, OpenMP, OpenCL, OpenGL, GLSL, Rink.rs, Sage
+  \item \makebox[3.5cm][l]{Computational} Boolector, GMP, OpenMP, OpenCL, OpenGL, GLSL, Rink.rs, Sage
   \item \makebox[3.5cm][l]{Web Based} Rocket.rs, Zola, ReactJS, VueJS, NodeJS, ExpressJS, jQuery
   \end{itemize}
 \end{itemize}
@@ -130,21 +177,41 @@
     \item Worked in Java, using Swing, AWT, RMI, and several internal HPE libraries
     \end{itemize}
 }}
-\item{\cventry{Jul 2019 -- Aug 2019}{Tech Corps}{Programming Instructor}{Fort Collins, CO}{}{
-    \begin{itemize}
-    \item Lead multiple week long summer camps aimed at Middle and Elementary School students
-    \item Prepared and delivered material covering programming fundamentals, theory,
-      and applications
-    \item Delivered lessons and projects in Scratch, MIT App Inventor, and Python
-    \end{itemize}
-}}
+  \iftoggle{tech-corps}{
+  \item{\cventry{Jul 2019 -- Aug 2019}{Tech Corps}{Programming Instructor}{Fort Collins, CO}{}{
+      \begin{itemize}
+      \item Lead multiple week long summer camps aimed at Middle and Elementary School students
+      \item Prepared and delivered material covering programming fundamentals, theory,
+        and applications
+      \item Delivered lessons and projects in Scratch, MIT App Inventor, and Python
+      \end{itemize}
+  }}
+  }{}
 \end{itemize}
 % -------------------------------------
 % NOTABLE PROJECTS
 % -------------------------------------
 \section{Notable Projects}
 \begin{itemize}
-\item{\cventry{Aug 2021 -- May 2022}{Colorado State University -- ECE Department}
+  \iftoggle{pouchet}{
+  \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Louis-Noël Pouchet}
+    {Research on Practical Program Equivalence}{Ongoing Development}{}{
+      \begin{itemize}
+      \item Implementing a full-custom C compiler for data-specific targets, early efforts on language-agnostic analysis
+      \item Investigating topics in symbolic evaluation, high performance computing, and sparse computation
+      \item Sponsored by Intel and US Department of Energy, partnering with the NSF and Center for Domain-Specific Computing
+      \end{itemize}
+  }}}{}
+  \iftoggle{yashwant}{
+  \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Yashwant Malaiya}
+    {Practical Program Equivalence Project}{Ongoing Development}{}{
+      \begin{itemize}
+      \item Wrote a tool to prove program equivalence across software versions via LLVM symbolic execution
+      \item Achieved non-trivial equivalence analysis on Rust and \Cpp code, with graphical commentary on divergence
+      \item Implemented using Rust; symbolic computations solved with Haybale and Boolector
+      \end{itemize}
+  }}}{}
+\item{\cventry{Department of Electrical and Computer Engineering}{Colorado State University -- Under Prof. Olivera Notaros}
   {Senior Design Project}{Ongoing Development}{}{
     \begin{itemize}
     \item Designing and implementing an embedded systems framework for enterprise-grade
@@ -165,14 +232,12 @@
     \begin{itemize}
     \item A program launcher, unit-aware calculator, spellchecker, search engine
       dispatcher, and general purpose menu for Linux
-    \item A port of the popular GNU utility dmenu to Rust, offering increased speed,
-      lower memory usage, and extensive plugin support
-    \item Maintains perfect backwards compatibility, garnering thousands of users and 100\+ stars on GitHub
+    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 100\+ stars on GitHub
     \end{itemize}
 }}
 \end{itemize}
 
 % for some reason, it's assumed that multiple pages exist
 % make this page look shorter so a '1/2' toast isn't visible
-\vspace*{-15cm}
+\vspace*{-18cm}
 \end{document}
