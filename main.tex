@@ -21,10 +21,6 @@
 % CEC silver medal text
 \toggletrue{silvermedal}
 
-\newtoggle{pouchet}
-% Practical Program Equivalence project
-\togglefalse{pouchet}
-
 \newtoggle{yashwant}
 % The other practical program equivalence project
 \toggletrue{yashwant}
@@ -32,6 +28,11 @@
 \newtoggle{dmenu}
 % dmenu-rs
 \togglefalse{dmenu}
+
+\newtoggle{headerpadding}
+% Add extra padding around the mission statement and title
+% Used when there is extra space at the bottom
+\toggletrue{headerpadding}
 
 
 % -------------------------------------
@@ -72,7 +73,10 @@
 % CONTENT
 % -------------------------------------
 
-\name{Devin}{Pohl}
+\name{Devin}{Pohl
+  \iftoggle{headerpadding}{
+    \vspace{0.25em}
+  }{}}
 \address{5225 White Willow Dr Unit J210}{Fort Collins, Colorado}{United States}
 \phone[mobile]{+1 (505) 419-1052}   
 %\email{devin.pohl@colostate.edu}
@@ -87,13 +91,21 @@
 % -------------------------------------
 % SUMMARY
 % -------------------------------------
-\vspace{-2em} % used to remove annoying vertical space under title
+\iftoggle{headerpadding}{
+  \vspace{-1.75em}
+}{
+  \vspace{-2em} % used to remove annoying vertical space under title
+}
 \small{
   I am a compiler engineer at Microsoft and recently graduated as Colorodo's top-of-class in undergraduate computer engineering.
 
   I am currently applying for a PhD program in compilers, high performance computing, and hardware-software co-design.
 }
-\vspace{-0.5em} % used to make last workaround look consistant
+\iftoggle{headerpadding}{
+  \vspace{-0.25em}
+}{
+  \vspace{-0.5em} % used to make last workaround look consistant
+}
 % -------------------------------------
 % EDUCATION
 % -------------------------------------
@@ -135,16 +147,14 @@
 \begin{itemize}
 \item \textbf{Programming Languages:}
   \begin{itemize}
-  \item \makebox[3.5cm][l]{Procedural} ARM Assembly, Bash, \textbf{C}, Fish, LLVM, Matlab, MIPS, Spice, Verilog
-  \item \makebox[3.5cm][l]{Object-Oriented} Arduino INO, \textbf{\Cpp}, Java, JavaScript, Python, \textbf{Rust}
-  \item \makebox[3.5cm][l]{Functional} Lisp, Elisp, \LaTeX, Scala
+  \item \makebox[3.5cm][l]{Low-Level} ARM Assembly, LLVM, MASM, MIPS, x86 and x64 Assembly, UTC IR
+  \item \makebox[3.5cm][l]{High-Level} \textbf{C}, \textbf{\Cpp}, Matlab, Java, JavaScript/TypeScript, Lisp, Python, Scala, \textbf{Rust}
+  \item \makebox[3.5cm][l]{Synthetic} GLSL, \LaTeX, Spice, Verilog
   \end{itemize}
-\item \textbf{Libraries and Frameworks:} 
+\item \textbf{Libraries, and Tools:} 
   \begin{itemize}
-  \item \makebox[3.5cm][l]{Graphical} Native X11, XCB, Cairo, Pango, Unicode CLDR,
-    GTK, Qt, Android API, ncurses
-  \item \makebox[3.5cm][l]{Computational} Boolector, GMP, OpenMP, OpenCL, OpenGL, GLSL, Rink.rs, Sage
-  \item \makebox[3.5cm][l]{Web Based} Rocket.rs, Zola, ReactJS, VueJS, NodeJS, ExpressJS, jQuery
+  \item \makebox[3.5cm][l]{Computational} Boolector, GMP, OpenCL, OpenMP, Rink.rs, SageMath
+  \item \makebox[3.5cm][l]{Graphical} X11, XCB, Cairo, Pango, Unicode CLDR, GTK, Qt
   \end{itemize}
 \end{itemize}
 % -------------------------------------
@@ -152,6 +162,14 @@
 % -------------------------------------
 \section{Work Experience}
 \begin{itemize}
+\item{\cventry{Jun 2022 -- Present}{Microsoft -- DevDiv BLINK Team}
+  {Compiler Engineer}{Redmond, WA}{}{
+    \begin{itemize}
+    \item Working as a part of the Backend Link Team to bring up the ARM64 native toolchain
+    \item Implementing features and fixing bugs in MSVC's linker and assemblers
+    \item Focusing on machine-dependent codegen, determinism, and build modernization
+    \end{itemize}
+}}
 \item{\cventry{May 2021 -- Aug 2021}{Hewlett Packard Enterprise -- NonStop Low-Level Team}
   {Platform Engineering Intern}{Fort Collins, CO}{}{
     \begin{itemize}
@@ -178,7 +196,7 @@
 \begin{itemize}
   \iftoggle{yashwant}{
   \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Yashwant Malaiya}
-    {Practical Program Equivalence Project}{Completed May 2022}{}{
+    {Academic Research: Practical Program Equivalence}{Concluded May 2022}{}{
       \begin{itemize}
       \item Wrote a tool to prove program equivalence across software versions via LLVM symbolic execution
       \item Achieved non-trivial equivalence analysis on Rust and \Cpp code, with graphical commentary on divergence
@@ -202,16 +220,18 @@
     \item Guarantees memory safety, thread safety, deadlock protection, type correctness, and name-space parity
     \end{itemize}
 }}
+  
+      \iftoggle{dmenu}{
 \item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{arch_logo.png}}\xspace\httplink[arch::aur::dmenu-rs]{aur.archlinux.org/packages/dmenu-rs}}{\protect\faGithub\xspace\httplink[Shizcow/dmenu-rs]{www.github.com/Shizcow/dmenu-rs}}{dmenu-rs}{v5.5.1 Released Dec 2020}{}{
     \begin{itemize}
     \item A program launcher, unit-aware calculator, spellchecker, search engine
       dispatcher, and general purpose menu for Linux
-    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 100\+ stars on GitHub
+    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 150\+ stars on GitHub
     \end{itemize}
-}}
+}}}{}
 \end{itemize}
 
 % for some reason, it's assumed that multiple pages exist
 % make this page look shorter so a '1/2' toast isn't visible
-\vspace*{-18cm}
+\vspace*{-4cm}
 \end{document}
