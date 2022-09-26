@@ -17,10 +17,6 @@
 % CONDITIONALS
 % -------------------------------------
 
-\newtoggle{mission-grad}
-% Mission statement: Are we talking about grad school?
-\toggletrue{mission-grad}
-
 \newtoggle{silvermedal}
 % CEC silver medal text
 \toggletrue{silvermedal}
@@ -33,9 +29,10 @@
 % The other practical program equivalence project
 \toggletrue{yashwant}
 
-\newtoggle{tech-corps}
-% Tech corps job
-\togglefalse{tech-corps}
+\newtoggle{dmenu}
+% dmenu-rs
+\togglefalse{dmenu}
+
 
 % -------------------------------------
 % PREAMBLE
@@ -76,12 +73,12 @@
 % -------------------------------------
 
 \name{Devin}{Pohl}
-\address{5707 Zinfandel St}{Greeley, Colorado}{United States}
-\phone[mobile]{(505) 419-1052}   
-\email{devin.pohl@colostate.edu}
+\address{5225 White Willow Dr Unit J210}{Fort Collins, Colorado}{United States}
+\phone[mobile]{+1 (505) 419-1052}   
+%\email{devin.pohl@colostate.edu}
 \social[email2]{pohl.devin@gmail.com } % space so newline behaves
 \social[github]{Shizcow}
-\social[arch]{Shizcow}
+%\social[arch]{Shizcow}
 \social[homepage]{www.pohldev.in}
 
 
@@ -92,12 +89,9 @@
 % -------------------------------------
 \vspace{-2em} % used to remove annoying vertical space under title
 \small{
-    I recently completed my Computer Engineering undergraduate degree at Colorado State University.\\
-  \iftoggle{mission-grad}{
-    I will return for a graduate degree in compilers and high performance computing, with additional interests in firmware and kernels.
-  }{
-    I have a passion for programming and electronics, with interests in firmware, compilers, and high performance computing.
-  }
+  I am a compiler engineer at Microsoft and recently graduated as Colorodo's top-of-class in undergraduate computer engineering.
+
+  I am currently applying for a PhD program in compilers, high performance computing, and hardware-software co-design.
 }
 \vspace{-0.5em} % used to make last workaround look consistant
 % -------------------------------------
@@ -124,13 +118,13 @@
       Compilers,
       Fault Tolerant Computing,
       Computer Micro-Architecture,
+      VLSI,
       Software Engineering,
       \\
-      Operating Systems,
-      VLSI,
+      Abstract and Discrete Mathematics,
       Computer Networking,
-      Analog and Digital Circuit Design,
-      Signals and Systems
+      Operating Systems,
+      Analog and Digital Circuit Design
     \end{itemize}
 }}
 \end{itemize}
@@ -176,31 +170,12 @@
     \item Worked in Java, using Swing, AWT, RMI, and several internal HPE libraries
     \end{itemize}
 }}
-  \iftoggle{tech-corps}{
-  \item{\cventry{Jul 2019 -- Aug 2019}{Tech Corps}{Programming Instructor}{Fort Collins, CO}{}{
-      \begin{itemize}
-      \item Lead multiple week long summer camps aimed at Middle and Elementary School students
-      \item Prepared and delivered material covering programming fundamentals, theory,
-        and applications
-      \item Delivered lessons and projects in Scratch, MIT App Inventor, and Python
-      \end{itemize}
-  }}
-  }{}
 \end{itemize}
 % -------------------------------------
 % NOTABLE PROJECTS
 % -------------------------------------
 \section{Notable Projects}
 \begin{itemize}
-  \iftoggle{pouchet}{
-  \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Louis-Noël Pouchet}
-    {Research on Practical Program Equivalence}{Completed May 2022}{}{
-      \begin{itemize}
-      \item Implementing a full-custom C compiler for data-specific targets, early efforts on language-agnostic analysis
-      \item Investigating topics in symbolic evaluation, high performance computing, and sparse computation
-      \item Sponsored by Intel and US Department of Energy, partnering with the NSF and Center for Domain-Specific Computing
-      \end{itemize}
-  }}}{}
   \iftoggle{yashwant}{
   \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Yashwant Malaiya}
     {Practical Program Equivalence Project}{Completed May 2022}{}{
