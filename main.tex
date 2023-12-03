@@ -17,23 +17,43 @@
 % CONDITIONALS
 % -------------------------------------
 
+\newtoggle{personalemail}
+% Second email
+% As I go in and out of school, I'll include one or both
+\togglefalse{personalemail}
+
 \newtoggle{silvermedal}
 % CEC silver medal text
 \toggletrue{silvermedal}
 
+\newtoggle{undergradcoursework}
+% "Relevant Coursework" section in CSU
+\togglefalse{undergradcoursework}
+
+\newtoggle{earlyinterndesc}
+% Add description / bullet points on my pre-grad HPE internships
+\toggletrue{earlyinterndesc}
+
 \newtoggle{yashwant}
 % The other practical program equivalence project
-\toggletrue{yashwant}
+\togglefalse{yashwant}
+
+\newtoggle{seniord}
+% The other practical program equivalence project
+\togglefalse{seniord}
 
 \newtoggle{dmenu}
 % dmenu-rs
-\togglefalse{dmenu}
+\toggletrue{dmenu}
+
+\newtoggle{hotpatch}
+% dmenu-rs
+\togglefalse{hotpatch}
 
 \newtoggle{headerpadding}
 % Add extra padding around the mission statement and title
 % Used when there is extra space at the bottom
 \toggletrue{headerpadding}
-
 
 % -------------------------------------
 % PREAMBLE
@@ -68,49 +88,59 @@
              {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
 \makeatother
 
+% This fixes the addres field having a literal -- instead of an en dash
+\NewCommandCopy{\oldaddtomakeheaddetails}{\addtomakeheaddetails}
+\renewcommand{\addtomakeheaddetails}[2][\makeheaddetailssymbol]{
+  \ifthenelse{\equal{#1}{~--~}}{
+  \oldaddtomakeheaddetails[\xspace\textendash\xspace]{#2}
+  }{
+  \oldaddtomakeheaddetails[#1]{#2}
+  }
+}
 
 % -------------------------------------
 % CONTENT
 % -------------------------------------
 
-\name{Devin}{Pohl
-  \iftoggle{headerpadding}{
-    \vspace{0.25em}
-  }{}}
-\address{5225 White Willow Dr Unit J210}{Fort Collins, Colorado}{United States}
+\name{Devin}{Pohl\vspace{0.25em}}
+\address{Atlanta, Georgia}{United States}
 \phone[mobile]{+1 (505) 419-1052}   
-%\email{devin.pohl@colostate.edu}
-\social[email2]{pohl.devin@gmail.com } % space so newline behaves
+\email{dpohl@gatech.edu}
+\iftoggle{personalemail}{
+  \social[email2]{pohl.devin@gmail.com } % space so newline behaves
+}{}
 \social[github]{Shizcow}
 %\social[arch]{Shizcow}
 \social[homepage]{www.pohldev.in}
 
-
 \begin{document}
+
 \makecvtitle
 % -------------------------------------
 % SUMMARY
 % -------------------------------------
-\iftoggle{headerpadding}{
-  \vspace{-1.75em}
-}{
-  \vspace{-2em} % used to remove annoying vertical space under title
-}
-\small{
-  I am a compiler engineer at Microsoft, recent graduate of CSU, and Colorado's top-of-class in undergraduate computer engineering.
-
-  I am currently applying for a PhD program in compilers, high performance computing, and hardware-software co-design.
-}
-\iftoggle{headerpadding}{
-  \vspace{-0.25em}
-}{
-  \vspace{-0.5em} % used to make last workaround look consistant
-}
+\vspace{-3em} % used to remove annoying vertical space under title
+\begin{center}
+  \small{
+    \begin{tabular}{l}
+      I am a first-year PhD student beginning my research in writing compilers for novel architectures. \\
+      I am currently seeking a research internship in the compilers and/or computer architecture space. \\
+    \end{tabular}
+  }
+\end{center}
+\vspace{-1.5em} % used to make last workaround look consistant
 % -------------------------------------
 % EDUCATION
 % -------------------------------------
 \section{Education}
 \begin{itemize}
+\item{\cventry{Aug 2023 \textendash\xspace Present}{Doctorate of Philosophy in Computer Science}{Georgia Institute of Technology}{Atlanta, GA}{}{
+    \begin{itemize}
+    \item Advisor: \httplink[Vivek Sarkar]{vsarkar.cc.gatech.edu/}
+    \item Research Interests: Compilers, Novel Architectures, High Performance Computing
+    \end{itemize}
+}}
+  
 \item{\cventry{May 2022}{Bachelor of Science in Computer Engineering, Minor in Mathematics, Minor in Computer Science}{Colorado State University}{Fort Collins, CO}{}{
     \begin{itemize}
     \item
@@ -125,68 +155,56 @@
       }{
         \textit{summa cum laude}, 4.0 GPA
       }
-    \item
-      \textbf{Relevant Coursework:}
-      Compilers,
-      Fault Tolerant Computing,
-      Computer Micro-Architecture,
-      VLSI,
-      Software Engineering,
-      \\
-      Abstract and Discrete Mathematics,
-      Computer Networking,
-      Operating Systems,
-      Analog and Digital Circuit Design
+      \iftoggle{undergradcoursework}{
+      \item
+        \textbf{Relevant Coursework:}
+        Compilers,
+        Fault Tolerant Computing,
+        Computer Micro-Architecture,
+        VLSI,
+        Software Engineering,
+        \\
+        Abstract and Discrete Mathematics,
+        Computer Networking,
+        Operating Systems,
+        Analog and Digital Circuit Design
+      }{}
     \end{itemize}
 }}
-\end{itemize}
-% -------------------------------------
-% TECHNICAL SKILLS
-% -------------------------------------
-\section{Technical Skills}
-\begin{itemize}
-\item \textbf{Programming Languages:}
-  \begin{itemize}
-  \item \makebox[3.5cm][l]{Low-Level} ARM Assembly, LLVM, MASM, MIPS, x86 and x64 Assembly, UTC IR
-  \item \makebox[3.5cm][l]{High-Level} \textbf{C}, \textbf{\Cpp}, Matlab, Java, JavaScript/TypeScript, Lisp, Python, Scala, \textbf{Rust}
-  \item \makebox[3.5cm][l]{Synthetic} GLSL, \LaTeX, Spice, Verilog
-  \end{itemize}
-\item \textbf{Libraries, and Tools:} 
-  \begin{itemize}
-  \item \makebox[3.5cm][l]{Computational} Boolector, GMP, OpenCL, OpenMP, Rink.rs, SageMath
-  \item \makebox[3.5cm][l]{Graphical} X11, XCB, Cairo, Pango, Unicode CLDR, GTK, Qt
-  \end{itemize}
 \end{itemize}
 % -------------------------------------
 % WORK EXPERIENCE
 % -------------------------------------
 \section{Work Experience}
 \begin{itemize}
-\item{\cventry{Jun 2022 -- Present}{Microsoft -- DevDiv BLINK Team}
+\item{\cventry{Jun 2022 \textendash\xspace Aug 2023}{Microsoft \textemdash\xspace DevDiv PLINCO Team}
   {Compiler Engineer}{Redmond, WA}{}{
     \begin{itemize}
-    \item Working as a part of the Backend Link Team to bring up the ARM64 native toolchain
-    \item Implementing features and fixing bugs in MSVC's linker and assemblers
-    \item Focusing on machine-dependent codegen, determinism, and build modernization
+    \item Implemented features and fixing bugs in MSVC's linker, assemblers, and compiler back-end
+    \item Contributed early implementation work towards ARM64 native toolchain bringup
+    \item Led implementation effort for automated testing of toolchain determinism
+    \item Focused on machine-dependent codegen, determinism, and build modernization
     \end{itemize}
 }}
-\item{\cventry{May 2021 -- Aug 2021}{Hewlett Packard Enterprise -- NonStop Low-Level Team}
+\item{\cventry{May 2021 \textendash\xspace Aug 2021}{Hewlett Packard Enterprise \textemdash\xspace NonStop Low-Level Team}
   {Platform Engineering Intern}{Fort Collins, CO}{}{
-    \begin{itemize}
-    \item Designed a performance modeling library to mock enterprise-grade RDMA behavior without dedicated hardware
-    \item Proved feasibility of an implementation method that would drastically reduce startup cost for new customers
-    \item Worked in C with InfiniBand and NSK to invisibly apply kernel-mode modifications to existing benchmarks and applications
-    \end{itemize}
+    \iftoggle{earlyinterndesc}{
+      \begin{itemize}
+      \item Designed a performance modeling library to mock enterprise-grade RDMA behavior without dedicated hardware
+      \item Proved feasibility of an implementation method that would drastically reduce startup cost for new customers
+      \item Worked in C with InfiniBand and NSK to invisibly apply kernel-mode modifications to existing benchmarks and applications
+    \end{itemize}}{}
 }}
-\item{\cventry{May 2020 -- Aug 2020}{Hewlett Packard Enterprise -- NonStop Manageability Team}
+\item{\cventry{May 2020 \textendash\xspace Aug 2020}{Hewlett Packard Enterprise \textemdash\xspace NonStop Manageability Team}
   {Software Development Intern}{Fort Collins, CO}{}{
-    \begin{itemize}
-    \item Improved and optimized OSM, the main application for maintaining, updating,
-      and upgrading NonStop servers
-    \item Migrated critical security procedures from CLI to GUI, cutting down on time
-      overhead and human error for end-users
-    \item Worked in Java, using Swing, AWT, RMI, and several internal HPE libraries
-    \end{itemize}
+    \iftoggle{earlyinterndesc}{
+      \begin{itemize}
+      \item Improved and optimized OSM, the main application for maintaining, updating,
+        and upgrading NonStop servers
+      \item Migrated critical security procedures from CLI to GUI, cutting down on time
+        overhead and human error for end-users
+      \item Worked in Java, using Swing, AWT, RMI, and several internal HPE libraries
+    \end{itemize}}{}
 }}
 \end{itemize}
 % -------------------------------------
@@ -194,8 +212,17 @@
 % -------------------------------------
 \section{Notable Projects}
 \begin{itemize}
+\item{\cventry{\httplink[CRNCH Lab]{crnch.gatech.edu/}}{Georgia Institute of Technology \textemdash\xspace Under \httplink[Tom Conte]{ece.gatech.edu/directory/tom-conte}}
+  {Syndra Compiler}{Aug 2023 \textendash\xspace Present}{}{
+    \begin{itemize}
+    \item Building an optimizing compiler for a dataflow-based superconducting processor
+    \item Optimizations include SMT-driven optimal scheduling, simultaneous scheduling and register allocation,\\
+      and profile-guided / speculative optimizations (global instruction scheduling)
+    \item Written from the ground-up in C++ to compile RISC-V traces and RISC-V assembly to Syndra assembly
+    \end{itemize}
+}}
   \iftoggle{yashwant}{
-  \item{\cventry{Department of Computer Science}{Colorado State University -- Under Dr. Yashwant Malaiya}
+  \item{\cventry{Department of Computer Science}{Colorado State University \textemdash\xspace Under Dr. Yashwant Malaiya}
     {Academic Research: Practical Program Equivalence}{Concluded May 2022}{}{
       \begin{itemize}
       \item Wrote a tool to prove program equivalence across software versions via LLVM symbolic execution
@@ -203,32 +230,52 @@
       \item Implemented using Rust; symbolic computations solved with Haybale and Boolector
       \end{itemize}
   }}}{}
-\item{\cventry{Department of Electrical and Computer Engineering}{Colorado State University -- Under Prof. Olivera Notaros}
-  {Senior Design Project}{Completed May 2022}{}{
-    \begin{itemize}
-    \item Designing and implementing an embedded systems framework for enterprise-grade
-      quadrupedal robotics applications
-    \item Extending existing open-source designs to provide feature-parity with existing
-      industry solutions at a fraction of the cost
-    \item Collaborating with ECE Outreach to excite middle and high school students
-      about Electrical and Computer Engineering
-    \end{itemize}
-}}
-\item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{rust_logo.png}}\xspace\httplink[docs.rs/hotpatch]{docs.rs/hotpatch/0.3.0/hotpatch/}}{\protect\faGithub\xspace\httplink[Shizcow/hotpatch]{www.github.com/Shizcow/hotpatch}}{hotpatch}{v0.3.0 Released Feb 2021}{}{
-    \begin{itemize}
-    \item Rust crate for cross-platform hot-reloading of functions and methods at runtime as easily as possible
-    \item Guarantees memory safety, thread safety, deadlock protection, type correctness, and name-space parity
-    \end{itemize}
-}}
+  \iftoggle{seniord}{
+  \item{\cventry{Department of Electrical and Computer Engineering}{Colorado State University \textemdash\xspace Under Prof. Olivera Notaros}
+    {Senior Design Project}{Completed May 2022}{}{
+      \begin{itemize}
+      \item Designing and implementing an embedded systems framework for enterprise-grade
+        quadrupedal robotics applications
+      \item Extending existing open-source designs to provide feature-parity with existing
+        industry solutions at a fraction of the cost
+      \item Collaborating with ECE Outreach to excite middle and high school students
+        about Electrical and Computer Engineering
+      \end{itemize}
+  }}}{}
+  \iftoggle{hotpatch}{
+  \item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{rust_logo.png}}\xspace\httplink[docs.rs/hotpatch]{docs.rs/hotpatch/0.3.0/hotpatch/}}{\protect\faGithub\xspace\httplink[Shizcow/hotpatch]{www.github.com/Shizcow/hotpatch}}{hotpatch}{v0.3.0 Released Feb 2021}{}{
+      \begin{itemize}
+      \item Rust crate for cross-platform hot-reloading of functions and methods at runtime as easily as possible
+      \item Guarantees memory safety, thread safety, deadlock protection, type correctness, and name-space parity
+      \end{itemize}
+  }}}{}
   
       \iftoggle{dmenu}{
-\item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{arch_logo.png}}\xspace\httplink[arch::aur::dmenu-rs]{aur.archlinux.org/packages/dmenu-rs}}{\protect\faGithub\xspace\httplink[Shizcow/dmenu-rs]{www.github.com/Shizcow/dmenu-rs}}{dmenu-rs}{v5.5.1 Released Dec 2020}{}{
+\item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{arch_logo.png}}\xspace\httplink[arch::aur::dmenu-rs]{aur.archlinux.org/packages/dmenu-rs}}{\protect\faGithub\xspace\httplink[Shizcow/dmenu-rs]{www.github.com/Shizcow/dmenu-rs}}{dmenu-rs}{v5.5.3 Released Nov 2023}{}{
     \begin{itemize}
     \item A program launcher, unit-aware calculator, spellchecker, search engine
       dispatcher, and general purpose menu for Linux
-    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 150\+ stars on GitHub
+    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 180\+ stars on GitHub
     \end{itemize}
 }}}{}
+\end{itemize}
+
+% -------------------------------------
+% TECHNICAL SKILLS
+% -------------------------------------
+\section{Technical Skills}
+\begin{itemize}
+\item \textbf{Programming Languages:}
+  \begin{itemize}
+  \item \makebox[3.5cm][l]{Low-Level} ARM Assembly, RISC-V Assembly, LLVM, MASM, MIPS, x86 and x64 Assembly, UTC IR
+  \item \makebox[3.5cm][l]{High-Level} \textbf{C}, \textbf{\Cpp}, Matlab, Java, JavaScript/TypeScript, Lisp, Python, Scala, \textbf{Rust}
+  \item \makebox[3.5cm][l]{Synthetic} GLSL, \LaTeX, Spice, Verilog
+  \end{itemize}
+\item \textbf{Libraries, and Tools:} 
+  \begin{itemize}
+  \item \makebox[3.5cm][l]{Computational} Boolector, CaDiCaL, GMP, OpenCL, OpenMP, Rink.rs, SageMath, Z3
+  \item \makebox[3.5cm][l]{Graphical} X11, XCB, Cairo, Pango, Unicode CLDR, GTK, Qt
+  \end{itemize}
 \end{itemize}
 
 % for some reason, it's assumed that multiple pages exist
