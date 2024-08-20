@@ -32,7 +32,7 @@
 
 \newtoggle{earlyinterndesc}
 % Add description / bullet points on my pre-grad HPE internships
-\toggletrue{earlyinterndesc}
+\togglefalse{earlyinterndesc}
 
 \newtoggle{yashwant}
 % The other practical program equivalence project
@@ -123,8 +123,8 @@
 \begin{center}
   \small{
     \begin{tabular}{l}
-      I am a first-year PhD student beginning my research on exploring new compiler directions for novel architectures. \\
-      I am currently seeking a research internship in the compilers and/or computer architecture space. \\
+      I am a second-year PhD student continuing my research on exploring new compiler directions for novel architectures. \\
+      I have identified research interests in extreme heterogeneity, software-hardware co-design, and constraint programming. \\
     \end{tabular}
   }
 \end{center}
@@ -137,7 +137,7 @@
 \item{\cventry{Atlanta, GA}{Doctorate of Philosophy in Computer Science}{Georgia Institute of Technology}{Aug 2023 \textendash\xspace Present}{}{
     \begin{itemize}
     \item Advisor: \httplink[Vivek Sarkar]{vsarkar.cc.gatech.edu/}
-    \item Research Interests: Compilers, Novel Architectures, High Performance Computing
+    \item Research Experience: Compilers, Non-CMOS Architectures, Superconducting Architectures, Spiking Neural Networks
     \end{itemize}
 }}
   
@@ -149,8 +149,6 @@
         \begin{itemize}
         \item
           \textit{2022 CEC Silver Medal Candidate}: Recognized as the number one computer engineering undergraduate in all of Colorado
-        \item 
-          \textit{summa cum laude}, 4.0 GPA
         \end{itemize}
       }{
         \textit{summa cum laude}, 4.0 GPA
@@ -177,6 +175,15 @@
 % -------------------------------------
 \section{Work Experience}
 \begin{itemize}
+\item{\cventry{Oak Ridge, TN}{Oak Ridge National Laboratory \textemdash\xspace Abisko Project}
+  {Research Intern}{May 2024 \textendash\xspace Aug 2024}{}{
+    \begin{itemize}
+    \item Researched hardware-software co-design for running spiking neural networks on non-CMOS accelerators
+    \item Implemented a mapping tool with Google OR-Tools targeting heterogeneous memristor crossbar architectures
+    \item Extended processor simulator to correctly support multi-crossbar execution with network logging for profile-guided optimization
+    \item Started a body of work targeting multiple publications on optimal mapping, hotspot minimization, and architecture aware training
+    \end{itemize}
+}}
 \item{\cventry{Redmond, WA}{Microsoft \textemdash\xspace DevDiv PLINCO Team}
   {Compiler Engineer}{Jun 2022 \textendash\xspace Aug 2023}{}{
     \begin{itemize}
@@ -207,6 +214,7 @@
     \end{itemize}}{}
 }}
 \end{itemize}
+\vspace{-1.25em} % There's an inconsistant amount of space between these two sections for some reason
 % -------------------------------------
 % NOTABLE PROJECTS
 % -------------------------------------
@@ -251,11 +259,11 @@
   }}}{}
   
       \iftoggle{dmenu}{
-\item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{arch_logo.png}}\xspace\httplink[arch::aur::dmenu-rs]{aur.archlinux.org/packages/dmenu-rs}}{\protect\faGithub\xspace\httplink[Shizcow/dmenu-rs]{www.github.com/Shizcow/dmenu-rs}}{dmenu-rs}{v5.5.3 Released Nov 2023}{}{
+\item{\cventry{\protect\raisebox{-0.25mm}{\includegraphics[scale=0.205,decodearray={0 0 0 0 0 0}]{arch_logo.png}}\xspace\httplink[arch::aur::dmenu-rs]{aur.archlinux.org/packages/dmenu-rs}}{\protect\faGithub\xspace\httplink[Shizcow/dmenu-rs]{www.github.com/Shizcow/dmenu-rs}}{dmenu-rs}{v5.5.4 Released Aug 2024}{}{
     \begin{itemize}
     \item A program launcher, unit-aware calculator, spellchecker, search engine
       dispatcher, and general purpose menu for Linux
-    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 180\+ stars on GitHub
+    \item A port of the popular GNU utility dmenu to Rust, garnering thousands of users and 190\+ stars on GitHub
     \end{itemize}
 }}}{}
 \end{itemize}
@@ -267,13 +275,13 @@
 \begin{itemize}
 \item \textbf{Programming Languages:}
   \begin{itemize}
-  \item \makebox[3.5cm][l]{Low-Level} ARM Assembly, RISC-V Assembly, LLVM, MASM, MIPS, x86 and x64 Assembly, UTC IR
+  \item \makebox[3.5cm][l]{Low-Level} ARM Assembly, RISC-V Assembly, \textbf{LLVM}, MASM, MIPS, x86 and x64 Assembly, UTC IR
   \item \makebox[3.5cm][l]{High-Level} \textbf{C}, \textbf{\Cpp}, Matlab, Java, JavaScript/TypeScript, Lisp, Python, Scala, \textbf{Rust}
   \item \makebox[3.5cm][l]{Synthetic} GLSL, \LaTeX, Spice, Verilog
   \end{itemize}
 \item \textbf{Libraries, and Tools:} 
   \begin{itemize}
-  \item \makebox[3.5cm][l]{Computational} Boolector, CaDiCaL, GMP, OpenCL, OpenMP, Rink.rs, SageMath, Z3
+  \item \makebox[3.5cm][l]{Computational} Boolector, CaDiCaL, \textbf{Google OR-Tools}, GMP, OpenCL, OpenMP, Rink.rs, SageMath, Z3
   \item \makebox[3.5cm][l]{Graphical} X11, XCB, Cairo, Pango, Unicode CLDR, GTK, Qt
   \end{itemize}
 \end{itemize}
