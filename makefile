@@ -21,3 +21,9 @@ test:	default
 
 clean:
 	-rm -rf build
+
+# Convenience script to push to website... really only works on my machine
+deploy: build
+	cp $(JOB).pdf ../shizcow.github.io/static/uploads/resume.pdf
+	cp $(JOB).pdf ../shizcow.github.io/docs/uploads/resume.pdf
+	cd ../shizcow.github.io && git add static/uploads/resume.pdf docs/uploads/resume.pdf && git commit -m "Re-compile resume" && git push
