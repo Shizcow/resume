@@ -2,16 +2,42 @@ export TEXINPUTS=.:..//:
 JOB=DevinPohlResume
 LTX=xelatex
 
-SRCFILES=main.tex *.png
+SRCFILES=main.tex *.png *.bib
 
 default: $(JOB).pdf
 
-watch:
-	inotifywait -qm --event modify --format '%w' $(SRCFILES) | xargs -I{} $(MAKE)
+.PHONY: _force_run
+
+# Set this to 1 to enable console output, 0 to disable
+DEBUG ?= 0
 
 $(JOB).pdf: $(SRCFILES) | build
-	cd build && $(LTX) -jobname=$(JOB) ../main.tex
-	mv build/$(JOB).pdf .
+	@echo "Running LaTeX..."
+	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
+	@echo "Moving final PDF..."
+	@mv build/$(JOB).pdf .
+
+_force_run:
+	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
+
+_run_latex:
+	@if [ "$(DEBUG)" -eq 1 ]; then \
+		cd build && $(LTX) -jobname=$(JOB) ../main.tex 2>&1 | tee output.log; \
+	else \
+		cd build && $(LTX) -jobname=$(JOB) ../main.tex > output.log 2>&1; \
+	fi
+	@if grep -Pq "[Pp]lease \(re\)run Biber on the file" build/output.log; then \
+		echo "Running Biber..."; \
+		cd build && biber $(JOB); \
+		echo "Rerunning LaTeX after Biber..."; \
+		$(MAKE) -C .. _force_run JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG); \
+	elif grep -Pq "[Rr]erun to get outlines right|[Pp]lease rerun" build/output.log; then \
+		echo "Rerunning LaTeX..."; \
+		$(MAKE) _force_run JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG); \
+	fi
+
+watch:
+	inotifywait -qm --event modify --format '%w' $(SRCFILES) | xargs -I{} $(MAKE)
 
 build: # set up the build directory
 	mkdir build

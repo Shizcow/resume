@@ -12,6 +12,34 @@
 \usepackage{import}
 \usepackage{etoolbox}
 \usepackage[super]{nth}
+\usepackage[style=authoryear,sorting=ydnt,dashed=false]{biblatex}
+
+
+\renewbibmacro*{date}{}
+\renewbibmacro*{date+extrayear}{}
+\renewbibmacro*{issue+date}{}
+\newcommand*{\bibyear}{}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\iffieldequals{year}{\bibyear}
+        {}
+        {\printfield{year}%
+         \savefield{year}{\bibyear}}}
+     {\setlength{\topsep}{0pt}% layout parameters based on moderncvstyleclassic.sty
+      \setlength{\labelwidth}{\hintscolumnwidth}%
+      \setlength{\labelsep}{\separatorcolumnwidth}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \leftmargin\labelwidth%
+      \advance\leftmargin\labelsep}%
+      \sloppy\clubpenalty4000\widowpenalty4000}
+  {\endlist}
+  {\item}
+
+\firstname{Devin}
+\familyname{Pohl}
+\addbibresource{../biblatex-pubs.bib}
+
 
 % -------------------------------------
 % CONDITIONALS
@@ -215,6 +243,11 @@
 }}
 \end{itemize}
 \vspace{-1.25em} % There's an inconsistant amount of space between these two sections for some reason
+% -------------------------------------
+% PUBLICATIONS
+% -------------------------------------
+\nocite{A01}
+\printbibliography[title={Publications}]
 % -------------------------------------
 % NOTABLE PROJECTS
 % -------------------------------------
