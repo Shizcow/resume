@@ -1,6 +1,6 @@
 export TEXINPUTS=.:..//:
 JOB=DevinPohlResume
-LTX=xelatex
+LTX=lualatex
 
 SRCFILES=main.tex *.png *.bib
 
@@ -9,7 +9,7 @@ default: $(JOB).pdf
 .PHONY: _force_run
 
 # Set this to 1 to enable console output, 0 to disable
-DEBUG ?= 0
+DEBUG ?= 1
 
 $(JOB).pdf: $(SRCFILES) | build
 	@echo "Running LaTeX..."
@@ -19,8 +19,6 @@ $(JOB).pdf: $(SRCFILES) | build
 
 _force_run:
 	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
-	echo "And checking biber"
-	@$(MAKE) build/$(JOB).bbl JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
 
 _run_latex:
 	@if [ "$(DEBUG)" -eq 1 ]; then \
@@ -37,12 +35,6 @@ _run_latex:
 		echo "Rerunning LaTeX..."; \
 		$(MAKE) _force_run JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG); \
 	fi
-
-build/$(JOB).bbl: *.bib
-	echo "Running Biber..."
-	cd build && biber $(JOB)
-	echo "And re(re) running Latex..."
-	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
 
 watch:
 	inotifywait -qm --event modify --format '%w' $(SRCFILES) | xargs -I{} $(MAKE)
