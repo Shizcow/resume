@@ -90,6 +90,10 @@
 % Used when there is extra space at the bottom
 \toggletrue{headerpadding}
 
+\newtoggle{hpe}
+% Include HPE interhsip positions
+\togglefalse{hpe}
+
 % -------------------------------------
 % PREAMBLE
 % -------------------------------------
@@ -158,8 +162,9 @@
 \begin{center}
   \small{
     \begin{tabular}{l}
-      I am a second-year PhD student continuing my research on exploring new compiler directions for novel architectures. \\
+      I am a second-year PhD student seeking industry collaborators for my thesis on compiler directions for novel architectures. \\
       I have identified research interests in extreme heterogeneity, software-hardware co-design, and constraint programming. \\
+
     \end{tabular}
   }
 \end{center}
@@ -169,26 +174,17 @@
 % -------------------------------------
 \section{Education}
 \begin{itemize}
-\item{\cventry{Atlanta, GA}{Doctorate of Philosophy in Computer Science}{Georgia Institute of Technology}{Aug 2023 \textendash\xspace Present}{}{
+\item{\cventry{Atlanta, GA}{Georgia Institute of Technology}{Doctorate of Philosophy in Computer Science}{Aug 2023 \textendash\xspace Present}{}{
     \begin{itemize}
     \item Advisor: \httplink[Vivek Sarkar]{vsarkar.cc.gatech.edu/}
     \item Research Experience: Compilers, Non-CMOS Architectures, Superconducting Architectures, Spiking Neural Networks
     \end{itemize}
 }}
   
-\item{\cventry{Fort Collins, CO}{Bachelor of Science in Computer Engineering, Minor in Mathematics, Minor in Computer Science}{Colorado State University}{May 2022}{}{
+\item{\cventry{Fort Collins, CO}{Colorado State University}{Bachelor of Science in Computer Engineering{\normalfont, Minor in Mathematics, Minor in Computer Science}}{May 2022}{}{
     \begin{itemize}
-    \item
-      \textbf{Academic Distinctions:}
-      \iftoggle{silvermedal}{
-        \begin{itemize}
-        \item
-          \textit{2022 CEC Silver Medal Candidate}: Recognized as the number one computer engineering undergraduate in all of Colorado
-        \end{itemize}
-      }{
-        \textit{summa cum laude}, 4.0 GPA
-      }
-      \iftoggle{undergradcoursework}{
+    \item \textit{2022 CEC Silver Medal Candidate}: Recognized as the number one computer engineering undergraduate in all of Colorado
+      \iftoggle{undergradcoursework}{ % When I go 2 page, note 4.0 / summa cum laude
       \item
         \textbf{Relevant Coursework:}
         Compilers,
@@ -205,10 +201,11 @@
     \end{itemize}
 }}
 \end{itemize}
+\vspace{-1em} % There's an inconsistant amount of space between these two sections for some reason
 % -------------------------------------
-% WORK EXPERIENCE
+% EXPERIENCE
 % -------------------------------------
-\section{Work Experience}
+\section{Experience}
 \begin{itemize}
 \item{\cventry{Oak Ridge, TN}{Oak Ridge National Laboratory \textemdash\xspace Abisko Project}
   {Research Intern}{May 2024 \textendash\xspace Aug 2024}{}{
@@ -216,7 +213,6 @@
     \item Researched hardware-software co-design for running spiking neural networks on non-CMOS accelerators
     \item Implemented a mapping tool with Google OR-Tools targeting heterogeneous memristor crossbar architectures
     \item Extended processor simulator to correctly support multi-crossbar execution with network logging for profile-guided optimization
-    \item Started a body of work targeting multiple publications on optimal mapping, hotspot minimization, and architecture aware training
     \end{itemize}
 }}
 \item{\cventry{Redmond, WA}{Microsoft \textemdash\xspace DevDiv PLINCO Team}
@@ -225,9 +221,9 @@
     \item Implemented features and fixing bugs in MSVC's linker, assemblers, and compiler back-end
     \item Contributed early implementation work towards ARM64 native toolchain bringup
     \item Led implementation effort for automated testing of toolchain determinism
-    \item Focused on machine-dependent codegen, determinism, and build modernization
     \end{itemize}
 }}
+\iftoggle{hpe}{
 \item{\cventry{Fort Collins, CO}{Hewlett Packard Enterprise \textemdash\xspace NonStop Low-Level Team}
   {Platform Engineering Intern}{May 2021 \textendash\xspace Aug 2021}{}{
     \iftoggle{earlyinterndesc}{
@@ -248,14 +244,16 @@
       \item Worked in Java, using Swing, AWT, RMI, and several internal HPE libraries
     \end{itemize}}{}
 }}
+}{}
 \end{itemize}
-\vspace{-1.25em} % There's an inconsistant amount of space between these two sections for some reason
+\vspace{-0.65em} % It's a tight squeeze
 % -------------------------------------
 % PUBLICATIONS
 % -------------------------------------
 \nocite{AxSh}
 \nocite{Zhang2024SHADE}
 \printbibliography[title={Publications}]
+\vspace{-1.75em} % It's a tight squeeze
 % -------------------------------------
 % NOTABLE PROJECTS
 % -------------------------------------
@@ -264,10 +262,9 @@
 \item{\cventry{\httplink[CRNCH Lab]{crnch.gatech.edu/}}{Georgia Institute of Technology \textemdash\xspace Supervised by \httplink[Tom Conte]{ece.gatech.edu/directory/tom-conte} and \httplink[Vivek Sarkar]{vsarkar.cc.gatech.edu/}}
   {Syndra Compiler}{Aug 2023 \textendash\xspace Present}{}{
     \begin{itemize}
-    \item Building an optimizing compiler for a dataflow-based superconducting processor
-    \item Optimizations include SMT-driven optimal scheduling, simultaneous scheduling and register allocation,\\
-      and profile-guided / speculative optimizations (global instruction scheduling)
-    \item Written from the ground-up in C++ to compile RISC-V traces and RISC-V assembly to Syndra assembly
+    \item Building the first ever compiler for a general-purpose dataflow-based superconducting processor
+    \item 48-bit optimizing compiler and assmebler framework written from the ground-up in C++
+    \item Optimizations are highly machine-dependent due to single-port register files and limited core-to-core communication, \\incluing SMT-driven optimal scheduling, global instruction scheduling, and novel approaches to dataflow distance requirements
     \end{itemize}
 }}
   \iftoggle{yashwant}{
@@ -308,6 +305,7 @@
     \end{itemize}
 }}}{}
 \end{itemize}
+\vspace{-0.65em} % It's a tight squeeze
 
 % -------------------------------------
 % TECHNICAL SKILLS
@@ -324,6 +322,7 @@
   \begin{itemize}
   \item \makebox[3.5cm][l]{Computational} Boolector, CaDiCaL, \textbf{Google OR-Tools}, GMP, OpenCL, OpenMP, Rink.rs, SageMath, Z3
   \item \makebox[3.5cm][l]{Graphical} X11, XCB, Cairo, Pango, Unicode CLDR, GTK, Qt
+    % Will need to add machine learning stuff after this semester ends
   \end{itemize}
 \end{itemize}
 
