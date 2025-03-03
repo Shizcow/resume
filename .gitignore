@@ -2,6 +2,7 @@
 *.aux
 *.log
 *.out
+build
 
 # editor files
 *~

@@ -13,12 +13,14 @@ DEBUG ?= 0
 
 $(JOB).pdf: $(SRCFILES) | build
 	@echo "Running LaTeX..."
-	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
+	@$(MAKE) _force_run JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
 	@echo "Moving final PDF..."
 	@mv build/$(JOB).pdf .
 
 _force_run:
 	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
+	echo "And checking biber"
+	@$(MAKE) build/$(JOB).bbl JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
 
 _run_latex:
 	@if [ "$(DEBUG)" -eq 1 ]; then \
@@ -35,6 +37,12 @@ _run_latex:
 		echo "Rerunning LaTeX..."; \
 		$(MAKE) _force_run JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG); \
 	fi
+
+build/$(JOB).bbl: *.bib
+	echo "Running Biber..."
+	cd build && biber $(JOB)
+	echo "And re(re) running Latex..."
+	@$(MAKE) _run_latex JOB=$(JOB) LTX=$(LTX) DEBUG=$(DEBUG)
 
 watch:
 	inotifywait -qm --event modify --format '%w' $(SRCFILES) | xargs -I{} $(MAKE)
